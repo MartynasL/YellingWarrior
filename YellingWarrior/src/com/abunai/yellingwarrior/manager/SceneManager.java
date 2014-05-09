@@ -9,6 +9,7 @@ import com.abunai.yellingwarrior.base.BaseScene;
 import com.abunai.yellingwarrior.scene.GameScene;
 import com.abunai.yellingwarrior.scene.LoadingScene;
 import com.abunai.yellingwarrior.scene.MainMenuScene;
+import com.abunai.yellingwarrior.scene.RezultataiScene;
 import com.abunai.yellingwarrior.scene.SplashScene;
 
 public class SceneManager
@@ -21,6 +22,7 @@ public class SceneManager
     private BaseScene menuScene;
     private BaseScene gameScene;
     private BaseScene loadingScene;
+    private BaseScene rezultataiScene;
     
     //---------------------------------------------
     // VARIABLES
@@ -40,6 +42,7 @@ public class SceneManager
         SCENE_MENU,
         SCENE_GAME,
         SCENE_LOADING,
+        SCENE_REZULTATAI,
     }
     
     //---------------------------------------------
@@ -69,6 +72,9 @@ public class SceneManager
             case SCENE_LOADING:
                 setScene(loadingScene);
                 break;
+            case SCENE_REZULTATAI:
+            	setScene(rezultataiScene);
+            	break;
             default:
                 break;
         }
@@ -154,6 +160,30 @@ public class SceneManager
                     ResourcesManager.getInstance().loadMenuTextures();
                 }
                 setScene(menuScene);
+            }
+        }));
+    }
+
+	public void loadRezultataiScene(final Engine mEngine)
+	{
+        setScene(loadingScene);
+        ResourcesManager.getInstance().unloadMenuTextures();
+        mEngine.registerUpdateHandler(new TimerHandler(0.1f, new ITimerCallback() 
+        {
+            public void onTimePassed(final TimerHandler pTimerHandler) 
+            {
+                mEngine.unregisterUpdateHandler(pTimerHandler);
+                if (menuScene != null) {
+
+                	menuScene.disposeScene();
+                	//ResourcesManager.getInstance().unloadGameTextures();
+                	menuScene = null;
+
+                    ResourcesManager.getInstance().loadRezultataiTextures();
+                }
+                
+                rezultataiScene = new RezultataiScene();
+                setScene(rezultataiScene);
             }
         }));
     }

@@ -65,6 +65,15 @@ public class MainMenuScene extends BaseScene implements IOnMenuItemClickListener
 	            return true;
 	        case MENU_OPTIONS:
 	            return true;
+	        case MENU_ATSILIEPIMAI:
+	            return true;
+	        case MENU_PARDUOTUVE:
+	            return true;
+	        case MENU_REZULTATAI:
+	        	SceneManager.getInstance().loadRezultataiScene(engine);
+	            return true;
+	        case MENU_ISEITI:
+	        	System.exit(0);
 	        default:
 	            return false;
 	    }

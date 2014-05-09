@@ -36,9 +36,11 @@ public class ResourcesManager
 
     private BitmapTextureAtlas splashTextureAtlas;
     private BuildableBitmapTextureAtlas menuTextureAtlas;
+    private BuildableBitmapTextureAtlas rezultataiTextureAtlas;
     
     public ITextureRegion splash_region;
     public ITextureRegion menu_background_region;
+    public ITextureRegion rezultatai_background_region;
     public ITextureRegion play_region;
     public ITextureRegion options_region;
     public ITextureRegion parduotuve_region;
@@ -88,6 +90,13 @@ public class ResourcesManager
         loadGameAudio();
     }
     
+    public void loadRezultataiResources()
+    {
+        loadRezultataiGraphics();
+        loadRezultataiAudio();
+        loadRezultataiFonts();
+    }
+    
     private void loadMenuGraphics()
     {
     	BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/menu/");
@@ -135,6 +144,49 @@ public class ResourcesManager
     {
         
     }
+    
+    private void loadRezultataiGraphics()
+    {
+    	BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/rezultatai/");
+    	rezultataiTextureAtlas = new BuildableBitmapTextureAtlas(activity.getTextureManager(), 800, 800, TextureOptions.BILINEAR);
+    	rezultatai_background_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(rezultataiTextureAtlas, activity, "rezultatai_background.png");
+    	rezultatai_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(rezultataiTextureAtlas, activity, "rezultatai.png");
+    	       
+    	try 
+    	{
+    	    this.rezultataiTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
+    	    this.rezultataiTextureAtlas.load();
+    	} 
+    	catch (final TextureAtlasBuilderException e)
+    	{
+    		Log.e("rezultataiTextureAtlas", "failed loading rezultataiTextureAtlas");
+    	    Debug.e(e);
+    	}
+    }
+    
+    private void loadRezultataiFonts()
+    {
+        FontFactory.setAssetBasePath("font/");
+        final ITexture mainFontTexture = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+
+        font = FontFactory.createStrokeFromAsset(activity.getFontManager(), mainFontTexture, activity.getAssets(), "grasping.ttf", 50, true, Color.WHITE, 2, Color.BLACK);
+        font.load();
+    }
+    
+    private void loadRezultataiAudio()
+    {
+        
+    }
+
+    public void unloadRezultataiTextures()
+    {
+        menuTextureAtlas.unload();
+    }
+    
+    public void loadRezultataiTextures() 
+	{
+		rezultataiTextureAtlas.load();		
+	}
 
     private void loadGameGraphics()
     {
@@ -210,5 +262,5 @@ public class ResourcesManager
     public static ResourcesManager getInstance()
     {
         return INSTANCE;
-    }
+    }	
 }
