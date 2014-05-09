@@ -24,7 +24,7 @@ public class GameActivity extends BaseGameActivity
 {
 	private ResourcesManager resourcesManager;
 	private BoundCamera camera;
-	
+	//test commit
 	
     public EngineOptions onCreateEngineOptions()
     {
