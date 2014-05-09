@@ -154,7 +154,7 @@ public class ResourcesManager
     	       
     	try 
     	{
-    	    this.rezultataiTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
+    		this.rezultataiTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
     	    this.rezultataiTextureAtlas.load();
     	} 
     	catch (final TextureAtlasBuilderException e)
@@ -180,13 +180,13 @@ public class ResourcesManager
 
     public void unloadRezultataiTextures()
     {
-        menuTextureAtlas.unload();
+        rezultataiTextureAtlas.unload();
     }
     
     public void loadRezultataiTextures() 
 	{
 		rezultataiTextureAtlas.load();		
-	}
+	}   
 
     private void loadGameGraphics()
     {

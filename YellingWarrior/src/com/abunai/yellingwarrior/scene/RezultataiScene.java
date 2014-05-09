@@ -18,7 +18,7 @@ public class RezultataiScene extends BaseScene implements IOnMenuItemClickListen
 	@Override
 	public SceneType getSceneType()
 	{
-	    return SceneType.SCENE_MENU;
+	    return SceneType.SCENE_REZULTATAI;
 	}
 	
 	@Override
@@ -29,7 +29,7 @@ public class RezultataiScene extends BaseScene implements IOnMenuItemClickListen
 	
 	private void createBackground()
 	{
-	    attachChild(new Sprite(0, 0, resourcesManager.menu_background_region, vbom)
+	    attachChild(new Sprite(0, 0, resourcesManager.rezultatai_background_region, vbom)
 	    {
 	        @Override
 	        protected void preDraw(GLState pGLState, Camera pCamera) 
@@ -48,14 +48,38 @@ public class RezultataiScene extends BaseScene implements IOnMenuItemClickListen
 	}
 
 	@Override
-	public void createScene() {
-		// TODO Auto-generated method stub
-		
+	public void createScene() 
+	{
+		createBackground();
+	    createRezultataiChildScene();		
 	}
 
 	@Override
 	public void disposeScene() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private MenuScene rezultataiChildScene;
+	private final int MENU_REZULTATAI = 4;
+	
+	private void createRezultataiChildScene()
+	{
+		rezultataiChildScene = new MenuScene(camera);
+		rezultataiChildScene.setPosition(0, 0);
+	    
+	    final IMenuItem rezultataiMenuItem = new ScaleMenuItemDecorator(new SpriteMenuItem(MENU_REZULTATAI, resourcesManager.rezultatai_region, vbom), 1.2f, 1);
+	    
+	    rezultataiChildScene.addMenuItem(rezultataiMenuItem);
+	    
+	    rezultataiChildScene.buildAnimations();
+	    rezultataiChildScene.setBackgroundEnabled(false);
+	    
+	   // playMenuItem.setPosition(playMenuItem.getX(), playMenuItem.getY() - 110);
+	   // optionsMenuItem.setPosition(optionsMenuItem.getX(), optionsMenuItem.getY() + 10);
+	    
+	    rezultataiChildScene.setOnMenuItemClickListener(this);
+	    
+	    setChildScene(rezultataiChildScene);
 	}
 }

@@ -114,6 +114,8 @@ public class SceneManager
         ResourcesManager.getInstance().loadMenuResources();
         menuScene = new MainMenuScene();
         loadingScene = new LoadingScene();
+        ResourcesManager.getInstance().loadRezultataiResources();
+        rezultataiScene = new RezultataiScene();
         SceneManager.getInstance().setScene(menuScene);
         disposeSplashScene();
     }
@@ -154,8 +156,13 @@ public class SceneManager
                 if (gameScene != null) {
 
                 	gameScene.disposeScene();
-                	//ResourcesManager.getInstance().unloadGameTextures();
                 	gameScene = null;
+
+                    ResourcesManager.getInstance().loadMenuTextures();
+                }
+                else if (rezultataiScene != null)
+                {
+                	ResourcesManager.getInstance().unloadRezultataiTextures();
 
                     ResourcesManager.getInstance().loadMenuTextures();
                 }
@@ -172,17 +179,10 @@ public class SceneManager
         {
             public void onTimePassed(final TimerHandler pTimerHandler) 
             {
-                mEngine.unregisterUpdateHandler(pTimerHandler);
-                if (menuScene != null) {
+            	mEngine.unregisterUpdateHandler(pTimerHandler);
+            	ResourcesManager.getInstance().unloadMenuTextures();
 
-                	menuScene.disposeScene();
-                	//ResourcesManager.getInstance().unloadGameTextures();
-                	menuScene = null;
-
-                    ResourcesManager.getInstance().loadRezultataiTextures();
-                }
-                
-                rezultataiScene = new RezultataiScene();
+                ResourcesManager.getInstance().loadRezultataiTextures();
                 setScene(rezultataiScene);
             }
         }));
