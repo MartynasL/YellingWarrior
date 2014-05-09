@@ -61,22 +61,21 @@ public class RezultataiScene extends BaseScene implements IOnMenuItemClickListen
 	}
 	
 	private MenuScene rezultataiChildScene;
-	private final int MENU_REZULTATAI = 4;
+	private final int MENU_ATGAL = 0;
 	
 	private void createRezultataiChildScene()
 	{
 		rezultataiChildScene = new MenuScene(camera);
 		rezultataiChildScene.setPosition(0, 0);
 	    
-	    final IMenuItem rezultataiMenuItem = new ScaleMenuItemDecorator(new SpriteMenuItem(MENU_REZULTATAI, resourcesManager.rezultatai_region, vbom), 1.2f, 1);
+	    final IMenuItem atgalMenuItem = new ScaleMenuItemDecorator(new SpriteMenuItem(MENU_ATGAL, resourcesManager.atgal_region, vbom), 1.2f, 1);
 	    
-	    rezultataiChildScene.addMenuItem(rezultataiMenuItem);
+	    rezultataiChildScene.addMenuItem(atgalMenuItem);
 	    
 	    rezultataiChildScene.buildAnimations();
 	    rezultataiChildScene.setBackgroundEnabled(false);
 	    
-	   // playMenuItem.setPosition(playMenuItem.getX(), playMenuItem.getY() - 110);
-	   // optionsMenuItem.setPosition(optionsMenuItem.getX(), optionsMenuItem.getY() + 10);
+	    atgalMenuItem.setPosition(atgalMenuItem.getX() - 250, atgalMenuItem.getY() + 200);
 	    
 	    rezultataiChildScene.setOnMenuItemClickListener(this);
 	    
