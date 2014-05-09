@@ -47,6 +47,7 @@ public class ResourcesManager
     public ITextureRegion iseiti_region;
     public ITextureRegion atsiliepimai_region;
     public ITextureRegion rezultatai_region;
+    public ITextureRegion atgal_region;
     
     public Engine engine;
     public GameActivity activity;
@@ -150,11 +151,11 @@ public class ResourcesManager
     	BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/rezultatai/");
     	rezultataiTextureAtlas = new BuildableBitmapTextureAtlas(activity.getTextureManager(), 800, 800, TextureOptions.BILINEAR);
     	rezultatai_background_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(rezultataiTextureAtlas, activity, "rezultatai_background.png");
-    	rezultatai_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(rezultataiTextureAtlas, activity, "rezultatai.png");
+    	atgal_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(rezultataiTextureAtlas, activity, "atgal.png");
     	       
     	try 
     	{
-    	    this.rezultataiTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
+    		this.rezultataiTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
     	    this.rezultataiTextureAtlas.load();
     	} 
     	catch (final TextureAtlasBuilderException e)
@@ -180,13 +181,13 @@ public class ResourcesManager
 
     public void unloadRezultataiTextures()
     {
-        menuTextureAtlas.unload();
+        rezultataiTextureAtlas.unload();
     }
     
     public void loadRezultataiTextures() 
 	{
 		rezultataiTextureAtlas.load();		
-	}
+	}   
 
     private void loadGameGraphics()
     {
