@@ -41,6 +41,10 @@ public class ResourcesManager
     public ITextureRegion menu_background_region;
     public ITextureRegion play_region;
     public ITextureRegion options_region;
+    public ITextureRegion parduotuve_region;
+    public ITextureRegion iseiti_region;
+    public ITextureRegion atsiliepimai_region;
+    public ITextureRegion rezultatai_region;
     
     public Engine engine;
     public GameActivity activity;
@@ -91,6 +95,10 @@ public class ResourcesManager
     	menu_background_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(menuTextureAtlas, activity, "menu_background.png");
     	play_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(menuTextureAtlas, activity, "play.png");
     	options_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(menuTextureAtlas, activity, "options.png");
+    	atsiliepimai_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(menuTextureAtlas, activity, "atsiliepimai.png");
+    	parduotuve_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(menuTextureAtlas, activity, "parduotuve.png");
+    	rezultatai_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(menuTextureAtlas, activity, "rezultatai.png");
+    	iseiti_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(menuTextureAtlas, activity, "iseiti.png");
     	       
     	try 
     	{

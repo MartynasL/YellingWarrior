@@ -292,7 +292,7 @@ public class GameScene extends BaseScene implements IAccelerationListener, IOnSc
 		int danger = 10;
 		final Random generator = new Random();
 		int result = generator.nextInt() % 100;
-		if ((result <= danger) && (enemyList.size() < 6)) {
+		if ((result <= danger) && (enemyList.size() < 2)) {
         	final Enemy enemy = new Enemy(Math.abs(generator.nextInt() % (ResourcesManager.CAMERA_WIDTH - ResourcesManager.ENEMY_TEXTURE_WIDTH)), 0, vbom, camera, physicsWorld) {
         		@Override
         		public void onDie() {

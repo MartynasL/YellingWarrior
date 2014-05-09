@@ -50,6 +50,10 @@ public class MainMenuScene extends BaseScene implements IOnMenuItemClickListener
 	private MenuScene menuChildScene;
 	private final int MENU_PLAY = 0;
 	private final int MENU_OPTIONS = 1;
+	private final int MENU_ATSILIEPIMAI = 2;
+	private final int MENU_PARDUOTUVE = 3;
+	private final int MENU_REZULTATAI = 4;
+	private final int MENU_ISEITI = 5;
 
 	public boolean onMenuItemClicked(MenuScene pMenuScene, IMenuItem pMenuItem, float pMenuItemLocalX, float pMenuItemLocalY)
 	{
@@ -80,15 +84,23 @@ public class MainMenuScene extends BaseScene implements IOnMenuItemClickListener
 	    
 	    final IMenuItem playMenuItem = new ScaleMenuItemDecorator(new SpriteMenuItem(MENU_PLAY, resourcesManager.play_region, vbom), 1.2f, 1);
 	    final IMenuItem optionsMenuItem = new ScaleMenuItemDecorator(new SpriteMenuItem(MENU_OPTIONS, resourcesManager.options_region, vbom), 1.2f, 1);
+	    final IMenuItem atsiliepimaiMenuItem = new ScaleMenuItemDecorator(new SpriteMenuItem(MENU_ATSILIEPIMAI, resourcesManager.atsiliepimai_region, vbom), 1.2f, 1);
+	    final IMenuItem parduotuveMenuItem = new ScaleMenuItemDecorator(new SpriteMenuItem(MENU_PARDUOTUVE, resourcesManager.parduotuve_region, vbom), 1.2f, 1);
+	    final IMenuItem rezultataiMenuItem = new ScaleMenuItemDecorator(new SpriteMenuItem(MENU_REZULTATAI, resourcesManager.rezultatai_region, vbom), 1.2f, 1);
+	    final IMenuItem iseitiMenuItem = new ScaleMenuItemDecorator(new SpriteMenuItem(MENU_ISEITI, resourcesManager.iseiti_region, vbom), 1.2f, 1);
 	    
 	    menuChildScene.addMenuItem(playMenuItem);
 	    menuChildScene.addMenuItem(optionsMenuItem);
+	    menuChildScene.addMenuItem(atsiliepimaiMenuItem);
+	    menuChildScene.addMenuItem(parduotuveMenuItem);
+	    menuChildScene.addMenuItem(rezultataiMenuItem);
+	    menuChildScene.addMenuItem(iseitiMenuItem);
 	    
 	    menuChildScene.buildAnimations();
 	    menuChildScene.setBackgroundEnabled(false);
 	    
-	    playMenuItem.setPosition(playMenuItem.getX(), playMenuItem.getY() + 10);
-	    optionsMenuItem.setPosition(optionsMenuItem.getX(), optionsMenuItem.getY() - 110);
+	   // playMenuItem.setPosition(playMenuItem.getX(), playMenuItem.getY() - 110);
+	   // optionsMenuItem.setPosition(optionsMenuItem.getX(), optionsMenuItem.getY() + 10);
 	    
 	    menuChildScene.setOnMenuItemClickListener(this);
 	    
