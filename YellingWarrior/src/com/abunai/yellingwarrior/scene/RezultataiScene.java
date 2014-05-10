@@ -17,7 +17,8 @@ import com.abunai.yellingwarrior.manager.SceneManager.SceneType;
 public class RezultataiScene extends BaseScene implements IOnMenuItemClickListener  {
 	
 	//private static int highestScore = 0;
-	public static Text score;
+	public static Text islikimasScore;
+	public static Text lygiaiScore;
 
 	@Override
 	public SceneType getSceneType()
@@ -63,10 +64,13 @@ public class RezultataiScene extends BaseScene implements IOnMenuItemClickListen
 	{
 		createBackground();
 	    createRezultataiChildScene();
-	    attachChild(new Text(50, 200, resourcesManager.font2, "Daugiausiai taðkø:", vbom));
+	    attachChild(new Text(50, 200, resourcesManager.font2, "Daugiausiai taðkø iðlikimo rëþime:", vbom));
 	    //score = new Text(50, 230, resourcesManager.font2, Integer.toString(highestScore), vbom);
-	    score = new Text(50, 230, resourcesManager.font2, "0000000000", vbom);
-	    attachChild(score);
+	    islikimasScore = new Text(50, 230, resourcesManager.font2, "0000000000", vbom);
+	    attachChild(islikimasScore);
+	    attachChild(new Text(50, 260, resourcesManager.font2, "Daugiausiai taðkø lygiø rëþime:", vbom));
+	    lygiaiScore = new Text(50, 290, resourcesManager.font2, "0000000000", vbom);
+	    attachChild(lygiaiScore);
 	}
 
 	@Override

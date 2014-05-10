@@ -7,6 +7,7 @@ import org.andengine.ui.IGameInterface.OnCreateSceneCallback;
 
 import com.abunai.yellingwarrior.base.BaseScene;
 import com.abunai.yellingwarrior.scene.GameScene;
+import com.abunai.yellingwarrior.scene.IslikimoRezimas;
 import com.abunai.yellingwarrior.scene.LoadingScene;
 import com.abunai.yellingwarrior.scene.Lygis;
 import com.abunai.yellingwarrior.scene.LygiuRezimas;
@@ -146,7 +147,25 @@ public class SceneManager
         splashScene = null;
     }
     
-    public void loadGameScene(final Engine mEngine)
+    public void loadIslikimoRezimasScene(final Engine mEngine)
+    {
+        setScene(loadingScene);
+        ResourcesManager.getInstance().unloadPasirinktiZaistiTextures();
+        mEngine.registerUpdateHandler(new TimerHandler(0.1f, new ITimerCallback() 
+        {
+            public void onTimePassed(final TimerHandler pTimerHandler) 
+            {
+                mEngine.unregisterUpdateHandler(pTimerHandler);
+                // game textures now loaded only one along with slpash scene (lame fix)
+
+                IslikimoRezimas islikimoRezimas = new IslikimoRezimas();
+                gameScene = islikimoRezimas;
+                setScene(gameScene);
+            }
+        }));
+    }
+    
+    public void loadLygiuRezimasScene(final Engine mEngine)
     {
         setScene(loadingScene);
         ResourcesManager.getInstance().unloadPasirinktiZaistiTextures();
@@ -158,7 +177,7 @@ public class SceneManager
                 // game textures now loaded only one along with slpash scene (lame fix)
 
                 LygiuRezimas lygiuRezimas = new LygiuRezimas();
-                lygiuRezimas.setCurrentLevel(new Lygis(3));
+                lygiuRezimas.setCurrentLevel(new Lygis(1));
                 gameScene = lygiuRezimas;
                 setScene(gameScene);
             }
@@ -206,7 +225,8 @@ public class SceneManager
                 ResourcesManager.getInstance().loadRezultataiTextures();
                 setScene(rezultataiScene);
                 //RezultataiScene.score.setText(RezultataiScene.getHighestScore() + "");
-                RezultataiScene.score.setText(String.valueOf(GameScene.getHighScore()));
+                RezultataiScene.islikimasScore.setText(String.valueOf(IslikimoRezimas.getStatistics()));
+                RezultataiScene.lygiaiScore.setText(String.valueOf(LygiuRezimas.getStatistics()));
             }
         }));
     }

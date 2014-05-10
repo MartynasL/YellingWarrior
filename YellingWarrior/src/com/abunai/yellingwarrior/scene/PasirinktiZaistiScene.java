@@ -88,7 +88,7 @@ public class PasirinktiZaistiScene extends BaseScene implements IOnMenuItemClick
 		switch(pMenuItem.getID())
 		{
 		case NAUJAS_ZAIDIMAS:
-            SceneManager.getInstance().loadGameScene(engine);
+            SceneManager.getInstance().loadLygiuRezimasScene(engine);
             return true;
 		case MENU_ATGAL:
 			SceneManager.getInstance().loadPasirinktiRezimaScene(engine);

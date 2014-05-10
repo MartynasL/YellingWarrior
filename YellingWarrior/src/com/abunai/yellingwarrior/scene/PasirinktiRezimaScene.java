@@ -90,6 +90,8 @@ public class PasirinktiRezimaScene extends BaseScene implements IOnMenuItemClick
 		case LYGIU_REZIMAS:
             SceneManager.getInstance().loadPasirinktiZaistiScene(engine);
             return true;
+		case ISLIKIMO_REZIMAS:
+			SceneManager.getInstance().loadIslikimoRezimasScene(engine);
 		case MENU_ATGAL:
 			SceneManager.getInstance().loadMenuScene(engine);
 			return true;

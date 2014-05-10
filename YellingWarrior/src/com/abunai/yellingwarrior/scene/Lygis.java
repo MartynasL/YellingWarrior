@@ -12,10 +12,13 @@ public class Lygis
 		{
 			case 1:
 				enemyNumber = 1;
+				break;
 			case 2:
 				enemyNumber = 3;
+				break;
 			case 3:
 				enemyNumber = 6;
+				break;
 		}
 	}
 	
