@@ -7,11 +7,14 @@ import org.andengine.ui.IGameInterface.OnCreateSceneCallback;
 
 import com.abunai.yellingwarrior.base.BaseScene;
 import com.abunai.yellingwarrior.scene.GameScene;
+import com.abunai.yellingwarrior.scene.IslikimoRezimas;
 import com.abunai.yellingwarrior.scene.LoadingScene;
 import com.abunai.yellingwarrior.scene.Lygis;
 import com.abunai.yellingwarrior.scene.LygiuRezimas;
 import com.abunai.yellingwarrior.scene.MainMenuScene;
+import com.abunai.yellingwarrior.scene.PasirinktiZaistiScene;
 import com.abunai.yellingwarrior.scene.RezultataiScene;
+import com.abunai.yellingwarrior.scene.PasirinktiRezimaScene;
 import com.abunai.yellingwarrior.scene.SplashScene;
 
 public class SceneManager
@@ -25,6 +28,9 @@ public class SceneManager
     private BaseScene gameScene;
     private BaseScene loadingScene;
     private BaseScene rezultataiScene;
+    private BaseScene pasirinktiRezimaScene;
+    private BaseScene pasirinktiZaistiScene;
+
     
     //---------------------------------------------
     // VARIABLES
@@ -45,6 +51,8 @@ public class SceneManager
         SCENE_GAME,
         SCENE_LOADING,
         SCENE_REZULTATAI,
+        SCENE_PASIRINKTI_REZIMA,
+        SCENE_PASIRINKTI_ZAISTI,
     }
     
     //---------------------------------------------
@@ -76,6 +84,12 @@ public class SceneManager
                 break;
             case SCENE_REZULTATAI:
             	setScene(rezultataiScene);
+            	break;
+            case SCENE_PASIRINKTI_REZIMA:
+            	setScene(pasirinktiRezimaScene);
+            	break;
+            case SCENE_PASIRINKTI_ZAISTI:
+            	setScene(pasirinktiZaistiScene);
             	break;
             default:
                 break;
@@ -118,6 +132,10 @@ public class SceneManager
         loadingScene = new LoadingScene();
         ResourcesManager.getInstance().loadRezultataiResources();
         rezultataiScene = new RezultataiScene();
+        ResourcesManager.getInstance().loadPasirinktiRezimaResources();
+        pasirinktiRezimaScene = new PasirinktiRezimaScene();
+        ResourcesManager.getInstance().loadPasirinktiZaistiResources();
+        pasirinktiZaistiScene = new PasirinktiZaistiScene();
         SceneManager.getInstance().setScene(menuScene);
         disposeSplashScene();
     }
@@ -129,10 +147,28 @@ public class SceneManager
         splashScene = null;
     }
     
-    public void loadGameScene(final Engine mEngine)
+    public void loadIslikimoRezimasScene(final Engine mEngine)
     {
         setScene(loadingScene);
-        ResourcesManager.getInstance().unloadMenuTextures();
+        ResourcesManager.getInstance().unloadPasirinktiZaistiTextures();
+        mEngine.registerUpdateHandler(new TimerHandler(0.1f, new ITimerCallback() 
+        {
+            public void onTimePassed(final TimerHandler pTimerHandler) 
+            {
+                mEngine.unregisterUpdateHandler(pTimerHandler);
+                // game textures now loaded only one along with slpash scene (lame fix)
+
+                IslikimoRezimas islikimoRezimas = new IslikimoRezimas();
+                gameScene = islikimoRezimas;
+                setScene(gameScene);
+            }
+        }));
+    }
+    
+    public void loadLygiuRezimasScene(final Engine mEngine)
+    {
+        setScene(loadingScene);
+        ResourcesManager.getInstance().unloadPasirinktiZaistiTextures();
         mEngine.registerUpdateHandler(new TimerHandler(0.1f, new ITimerCallback() 
         {
             public void onTimePassed(final TimerHandler pTimerHandler) 
@@ -141,7 +177,7 @@ public class SceneManager
                 // game textures now loaded only one along with slpash scene (lame fix)
 
                 LygiuRezimas lygiuRezimas = new LygiuRezimas();
-                lygiuRezimas.setCurrentLevel(new Lygis(3));
+                lygiuRezimas.setCurrentLevel(new Lygis(1));
                 gameScene = lygiuRezimas;
                 setScene(gameScene);
             }
@@ -188,7 +224,43 @@ public class SceneManager
 
                 ResourcesManager.getInstance().loadRezultataiTextures();
                 setScene(rezultataiScene);
-                RezultataiScene.score.setText(RezultataiScene.getHighestScore() + "");
+                //RezultataiScene.score.setText(RezultataiScene.getHighestScore() + "");
+                RezultataiScene.islikimasScore.setText(String.valueOf(IslikimoRezimas.getStatistics()));
+                RezultataiScene.lygiaiScore.setText(String.valueOf(LygiuRezimas.getStatistics()));
+            }
+        }));
+    }
+	
+	public void loadPasirinktiRezimaScene(final Engine mEngine)
+	{
+        setScene(loadingScene);
+        ResourcesManager.getInstance().unloadMenuTextures();
+        mEngine.registerUpdateHandler(new TimerHandler(0.1f, new ITimerCallback() 
+        {
+            public void onTimePassed(final TimerHandler pTimerHandler) 
+            {
+            	mEngine.unregisterUpdateHandler(pTimerHandler);
+            	ResourcesManager.getInstance().unloadMenuTextures();
+
+                ResourcesManager.getInstance().loadPasirinktiRezimaTextures();
+                setScene(pasirinktiRezimaScene);
+            }
+        }));
+    }
+	
+	public void loadPasirinktiZaistiScene(final Engine mEngine)
+	{
+        setScene(loadingScene);
+        ResourcesManager.getInstance().unloadPasirinktiRezimaTextures();
+        mEngine.registerUpdateHandler(new TimerHandler(0.1f, new ITimerCallback() 
+        {
+            public void onTimePassed(final TimerHandler pTimerHandler) 
+            {
+            	mEngine.unregisterUpdateHandler(pTimerHandler);
+            	ResourcesManager.getInstance().unloadPasirinktiRezimaTextures();
+
+                ResourcesManager.getInstance().loadPasirinktiZaistiTextures();
+                setScene(pasirinktiZaistiScene);
             }
         }));
     }

@@ -37,17 +37,24 @@ public class ResourcesManager
     private BitmapTextureAtlas splashTextureAtlas;
     private BuildableBitmapTextureAtlas menuTextureAtlas;
     private BuildableBitmapTextureAtlas rezultataiTextureAtlas;
+    private BuildableBitmapTextureAtlas pasirinktiRezimaTextureAtlas;
+    private BuildableBitmapTextureAtlas pasirinktiZaistiTextureAtlas;
     
     public ITextureRegion splash_region;
     public ITextureRegion menu_background_region;
     public ITextureRegion rezultatai_background_region;
+    public ITextureRegion background_region;
     public ITextureRegion play_region;
+    public ITextureRegion play_lygiai_region;
+    public ITextureRegion play_islikimas_region;
     public ITextureRegion options_region;
     public ITextureRegion parduotuve_region;
     public ITextureRegion iseiti_region;
     public ITextureRegion atsiliepimai_region;
     public ITextureRegion rezultatai_region;
     public ITextureRegion atgal_region;
+    public ITextureRegion naujas_zaidimas_region;
+    public ITextureRegion testi_region;
     
     public Engine engine;
     public GameActivity activity;
@@ -99,6 +106,20 @@ public class ResourcesManager
         loadRezultataiFonts();
     }
     
+    public void loadPasirinktiRezimaResources()
+    {
+        loadPasirinktiRezimaGraphics();
+        loadPasirinktiRezimaAudio();
+        loadPasirinktiRezimaFonts();
+    }
+    
+    public void loadPasirinktiZaistiResources()
+    {
+        loadPasirinktiZaistiGraphics();
+        loadPasirinktiZaistiAudio();
+        loadPasirinktiZaistiFonts();
+    }
+    
     private void loadMenuGraphics()
     {
     	BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/menu/");
@@ -110,7 +131,6 @@ public class ResourcesManager
     	parduotuve_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(menuTextureAtlas, activity, "parduotuve.png");
     	rezultatai_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(menuTextureAtlas, activity, "rezultatai.png");
     	iseiti_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(menuTextureAtlas, activity, "iseiti.png");
-    	       
     	try 
     	{
     	    this.menuTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
@@ -121,6 +141,7 @@ public class ResourcesManager
     	        Debug.e(e);
     	}
     }
+    
 
     private void loadMenuFonts()
     {
@@ -134,15 +155,102 @@ public class ResourcesManager
     public void unloadMenuTextures()
     {
         menuTextureAtlas.unload();
-    }
+    }    
         
     public void loadMenuTextures()
     {
         menuTextureAtlas.load();
     }
     
-    
     private void loadMenuAudio()
+    {
+        
+    }
+
+    private void loadPasirinktiRezimaGraphics()
+    {
+    	BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/pasirinktiRezima/");
+    	pasirinktiRezimaTextureAtlas = new BuildableBitmapTextureAtlas(activity.getTextureManager(), 800, 800, TextureOptions.BILINEAR);
+    	background_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(pasirinktiRezimaTextureAtlas, activity, "pasirinktiRezima_background.png");
+    	atgal_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(pasirinktiRezimaTextureAtlas, activity, "atgal.png");
+    	play_lygiai_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(pasirinktiRezimaTextureAtlas, activity, "lygiu_rezimas.png");
+    	play_islikimas_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(pasirinktiRezimaTextureAtlas, activity, "islikimo_rezimas.png");
+    	try 
+    	{
+    		this.pasirinktiRezimaTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
+    	    this.pasirinktiRezimaTextureAtlas.load();
+    	} 
+    	catch (final TextureAtlasBuilderException e)
+    	{
+    		Log.e("pasirinktiRezimaTextureAtlas", "failed loading pasirinktiRezimaTextureAtlas");
+    	    Debug.e(e);
+    	}
+    }
+    
+    public void loadPasirinktiRezimaTextures() 
+	{
+    	pasirinktiRezimaTextureAtlas.load();		
+	} 
+    
+    public void unloadPasirinktiRezimaTextures()
+    {
+        menuTextureAtlas.unload();
+    }
+    
+    private void loadPasirinktiRezimaFonts()
+    {
+        FontFactory.setAssetBasePath("font/");
+        final ITexture mainFontTexture = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+
+        font = FontFactory.createStrokeFromAsset(activity.getFontManager(), mainFontTexture, activity.getAssets(), "grasping.ttf", 50, true, Color.WHITE, 2, Color.BLACK);
+        font.load();
+    }
+    
+    private void loadPasirinktiRezimaAudio()
+    {
+        
+    }
+
+    private void loadPasirinktiZaistiGraphics()
+    {
+    	BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/pasirinktiRezima/");
+    	pasirinktiZaistiTextureAtlas = new BuildableBitmapTextureAtlas(activity.getTextureManager(), 800, 800, TextureOptions.BILINEAR);
+    	background_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(pasirinktiZaistiTextureAtlas, activity, "pasirinktiRezima_background.png");
+    	atgal_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(pasirinktiZaistiTextureAtlas, activity, "atgal.png");
+    	naujas_zaidimas_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(pasirinktiZaistiTextureAtlas, activity, "naujas_zaidimas.png");
+    	testi_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(pasirinktiZaistiTextureAtlas, activity, "testi.png");
+    	try 
+    	{
+    		this.pasirinktiZaistiTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
+    	    this.pasirinktiZaistiTextureAtlas.load();
+    	} 
+    	catch (final TextureAtlasBuilderException e)
+    	{
+    		Log.e("pasirinktiZaistiTextureAtlas", "failed loading pasirinktiZaistiTextureAtlas");
+    	    Debug.e(e);
+    	}
+    }
+    
+    public void loadPasirinktiZaistiTextures() 
+	{
+    	pasirinktiZaistiTextureAtlas.load();		
+	}  
+    
+    public void unloadPasirinktiZaistiTextures()
+    {
+    	pasirinktiZaistiTextureAtlas.unload();
+    }
+    
+    private void loadPasirinktiZaistiFonts()
+    {
+        FontFactory.setAssetBasePath("font/");
+        final ITexture mainFontTexture = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+
+        font = FontFactory.createStrokeFromAsset(activity.getFontManager(), mainFontTexture, activity.getAssets(), "grasping.ttf", 50, true, Color.WHITE, 2, Color.BLACK);
+        font.load();
+    }
+    
+    private void loadPasirinktiZaistiAudio()
     {
         
     }
@@ -190,7 +298,7 @@ public class ResourcesManager
 	{
 		rezultataiTextureAtlas.load();		
 	}   
-
+    
     private void loadGameGraphics()
     {
         BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/game/");
