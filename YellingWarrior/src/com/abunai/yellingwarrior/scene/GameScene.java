@@ -81,7 +81,7 @@ public class GameScene extends BaseScene implements IAccelerationListener, IOnSc
     private HUD gameHUD;
     private Text gameHUDLog1;
     private Text gameHUDLog2;
-    private int score = 0;
+    private int score = 0;    
 
 	private ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
     TimerHandler timerHandler;
@@ -250,6 +250,10 @@ public class GameScene extends BaseScene implements IAccelerationListener, IOnSc
                 	player.onDie();
                 }
          		gameHUDLog2.setText("SCORE: " + score);
+         		if (score >= RezultataiScene.getHighestScore())
+         		{
+         			RezultataiScene.setHighestScore(score);
+         		}
 	        }
 	    });
     }

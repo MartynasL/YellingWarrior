@@ -6,6 +6,7 @@ import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.entity.scene.menu.item.SpriteMenuItem;
 import org.andengine.entity.scene.menu.item.decorator.ScaleMenuItemDecorator;
 import org.andengine.entity.sprite.Sprite;
+import org.andengine.entity.text.Text;
 import org.andengine.opengl.util.GLState;
 import org.andengine.engine.camera.Camera;
 
@@ -14,6 +15,9 @@ import com.abunai.yellingwarrior.manager.SceneManager;
 import com.abunai.yellingwarrior.manager.SceneManager.SceneType;
 
 public class RezultataiScene extends BaseScene implements IOnMenuItemClickListener  {
+	
+	private static int highestScore = 0;
+	public static Text score;
 
 	@Override
 	public SceneType getSceneType()
@@ -29,6 +33,7 @@ public class RezultataiScene extends BaseScene implements IOnMenuItemClickListen
 	
 	private void createBackground()
 	{
+	
 	    attachChild(new Sprite(0, 0, resourcesManager.rezultatai_background_region, vbom)
 	    {
 	        @Override
@@ -38,20 +43,29 @@ public class RezultataiScene extends BaseScene implements IOnMenuItemClickListen
 	            pGLState.enableDither();
 	        }
 	    });
+	    
 	}
 
 	@Override
 	public boolean onMenuItemClicked(MenuScene pMenuScene, IMenuItem pMenuItem,
 			float pMenuItemLocalX, float pMenuItemLocalY) {
-		// TODO Auto-generated method stub
-		return false;
+		if (pMenuItem.getID() == 0)
+		{
+			SceneManager.getInstance().loadMenuScene(engine);
+			return true;
+		}
+		else
+			return false;
 	}
 
 	@Override
 	public void createScene() 
 	{
 		createBackground();
-	    createRezultataiChildScene();		
+	    createRezultataiChildScene();
+	    attachChild(new Text(50, 200, resourcesManager.font2, "Daugiausiai taðkø:", vbom));
+	    score = new Text(50, 230, resourcesManager.font2, Integer.toString(highestScore), vbom);
+	    attachChild(score);
 	}
 
 	@Override
@@ -80,5 +94,13 @@ public class RezultataiScene extends BaseScene implements IOnMenuItemClickListen
 	    rezultataiChildScene.setOnMenuItemClickListener(this);
 	    
 	    setChildScene(rezultataiChildScene);
+	}
+
+	public static int getHighestScore() {
+		return highestScore;
+	}
+
+	public static void setHighestScore(int highestScore) {
+		RezultataiScene.highestScore = highestScore;
 	}
 }

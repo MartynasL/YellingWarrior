@@ -184,6 +184,7 @@ public class SceneManager
 
                 ResourcesManager.getInstance().loadRezultataiTextures();
                 setScene(rezultataiScene);
+                RezultataiScene.score.setText(RezultataiScene.getHighestScore() + "");
             }
         }));
     }
