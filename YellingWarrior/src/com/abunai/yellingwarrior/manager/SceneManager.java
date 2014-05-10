@@ -8,6 +8,8 @@ import org.andengine.ui.IGameInterface.OnCreateSceneCallback;
 import com.abunai.yellingwarrior.base.BaseScene;
 import com.abunai.yellingwarrior.scene.GameScene;
 import com.abunai.yellingwarrior.scene.LoadingScene;
+import com.abunai.yellingwarrior.scene.Lygis;
+import com.abunai.yellingwarrior.scene.LygiuRezimas;
 import com.abunai.yellingwarrior.scene.MainMenuScene;
 import com.abunai.yellingwarrior.scene.RezultataiScene;
 import com.abunai.yellingwarrior.scene.SplashScene;
@@ -138,7 +140,9 @@ public class SceneManager
                 mEngine.unregisterUpdateHandler(pTimerHandler);
                 // game textures now loaded only one along with slpash scene (lame fix)
 
-                gameScene = new GameScene();
+                LygiuRezimas lygiuRezimas = new LygiuRezimas();
+                lygiuRezimas.setCurrentLevel(new Lygis(3));
+                gameScene = lygiuRezimas;
                 setScene(gameScene);
             }
         }));

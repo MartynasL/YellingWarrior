@@ -75,7 +75,7 @@ public class GameScene extends BaseScene implements IAccelerationListener, IOnSc
 	public static final FixtureDef ENEMY_HITBOX_FIXTURE_DEF = PhysicsFactory.createFixtureDef(0, 0, 0, false, CATEGORYBIT_ENEMY_HITBOX, MASKBITS_ENEMY_HITBOX, (short)0);
 
 	
-    private PhysicsWorld physicsWorld;
+    protected PhysicsWorld physicsWorld;
 	private Player player;
     private boolean gameOverDisplayed = false;
     private HUD gameHUD;
@@ -83,7 +83,7 @@ public class GameScene extends BaseScene implements IAccelerationListener, IOnSc
     private Text gameHUDLog2;
     private int score = 0;    
 
-	private ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+	protected ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
     TimerHandler timerHandler;
 
 	
@@ -292,7 +292,7 @@ public class GameScene extends BaseScene implements IAccelerationListener, IOnSc
 	}
 	
 	
-	private void generateEnemies() {
+	protected void generateEnemies() {
 		int danger = 10;
 		final Random generator = new Random();
 		int result = generator.nextInt() % 100;
