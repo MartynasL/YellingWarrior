@@ -79,6 +79,7 @@ public class ResourcesManager
 	public static final int CAMERA_HEIGHT = 480;
     
     public Font font;
+    public Font font2;
     
     //---------------------------------------------
     // CLASS LOGIC
@@ -146,9 +147,9 @@ public class ResourcesManager
     {
         FontFactory.setAssetBasePath("font/");
         final ITexture mainFontTexture = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-
+      
         font = FontFactory.createStrokeFromAsset(activity.getFontManager(), mainFontTexture, activity.getAssets(), "grasping.ttf", 50, true, Color.WHITE, 2, Color.BLACK);
-        font.load();
+        font.load();        
     }
 
     public void unloadMenuTextures()
@@ -278,8 +279,9 @@ public class ResourcesManager
         FontFactory.setAssetBasePath("font/");
         final ITexture mainFontTexture = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 
-        font = FontFactory.createStrokeFromAsset(activity.getFontManager(), mainFontTexture, activity.getAssets(), "grasping.ttf", 50, true, Color.WHITE, 2, Color.BLACK);
-        font.load();
+        font2 = FontFactory.createFromAsset(activity.getFontManager(), mainFontTexture, activity.getAssets(), "arial.ttf", 30F, true, Color.BLACK);
+        font2.load();
+        
     }
     
     private void loadRezultataiAudio()

@@ -205,6 +205,8 @@ public class SceneManager
 
                 ResourcesManager.getInstance().loadRezultataiTextures();
                 setScene(rezultataiScene);
+                //RezultataiScene.score.setText(RezultataiScene.getHighestScore() + "");
+                RezultataiScene.score.setText(String.valueOf(GameScene.getHighScore()));
             }
         }));
     }
