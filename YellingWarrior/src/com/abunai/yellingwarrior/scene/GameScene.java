@@ -76,12 +76,13 @@ public class GameScene extends BaseScene implements IAccelerationListener, IOnSc
 
 	
     protected PhysicsWorld physicsWorld;
-	private Player player;
-    private boolean gameOverDisplayed = false;
-    private HUD gameHUD;
-    private Text gameHUDLog1;
-    private Text gameHUDLog2;
-    private int score = 0;    
+    protected Player player;
+    protected boolean gameOverDisplayed = false;
+    protected HUD gameHUD;
+    protected Text gameHUDLog1;
+    protected Text gameHUDLog2;
+    protected int score = 0;    
+    protected static int highScore = 0;
 
 	protected ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
     TimerHandler timerHandler;
@@ -123,12 +124,12 @@ public class GameScene extends BaseScene implements IAccelerationListener, IOnSc
 	
 
 	
-    private void createBackground()
+	protected void createBackground()
     {
     	setBackground(new Background(Color.WHITE));
     }
 
-    private void createHUD()
+    protected void createHUD()
     {
         gameHUD = new HUD();
         gameHUDLog1 = new Text(20, 420, resourcesManager.font, "Log1", 50, new TextOptions(HorizontalAlign.LEFT), vbom);  
@@ -141,7 +142,7 @@ public class GameScene extends BaseScene implements IAccelerationListener, IOnSc
         camera.setHUD(gameHUD);
     }
     
-    private int time = 0;
+    protected int time = 0;
 	
 	@Override
 	public void onTimePassed(TimerHandler pTimerHandler) {
@@ -191,7 +192,7 @@ public class GameScene extends BaseScene implements IAccelerationListener, IOnSc
         this.sortChildren(true);
 	}
 
-    private void createPhysics()
+    protected void createPhysics()
     {
     	physicsWorld = new FixedStepPhysicsWorld(60, new Vector2(0, 0), false);
         registerUpdateHandler(physicsWorld);
@@ -250,12 +251,17 @@ public class GameScene extends BaseScene implements IAccelerationListener, IOnSc
                 	player.onDie();
                 }
          		gameHUDLog2.setText("SCORE: " + score);
-         		if (score >= RezultataiScene.getHighestScore())
+         		if (score > highScore)
          		{
-         			RezultataiScene.setHighestScore(score);
+         			highScore = score;
          		}
 	        }
 	    });
+    }
+    
+    public static int getHighScore()
+    {
+    	return highScore;
     }
 
     @Override
@@ -275,7 +281,7 @@ public class GameScene extends BaseScene implements IAccelerationListener, IOnSc
         return false;
     }
    
-    private void displayGameOverText()
+    protected void displayGameOverText()
     {
         gameHUDLog1.setText("GAME OVER");
         timerHandler = null;
@@ -315,7 +321,7 @@ public class GameScene extends BaseScene implements IAccelerationListener, IOnSc
         return SceneType.SCENE_GAME;
     }
 
-	private void destroyEnemy(final Enemy enemy)
+	protected void destroyEnemy(final Enemy enemy)
     {
             physicsWorld.unregisterPhysicsConnector(physicsWorld.getPhysicsConnectorManager().findPhysicsConnectorByShape(enemy));
             physicsWorld.destroyBody(enemy.getBody());
